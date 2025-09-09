@@ -59,13 +59,13 @@ export default function HomePage() {
                   {isRecording ? 'Listening...' : 'Click to start voice session'}
                 </h3>
                 <p className="text-gray-600">
-                  Try: "Create a LinkedIn post about AI trends"
+                  Try: &ldquo;Create a LinkedIn post about AI trends&rdquo;
                 </p>
               </div>
 
               {transcript && (
                 <div className="w-full bg-gray-50 rounded-lg p-4 text-left">
-                  <p className="text-gray-700 italic">"{transcript}"</p>
+                  <p className="text-gray-700 italic">&ldquo;{transcript}&rdquo;</p>
                 </div>
               )}
             </div>
