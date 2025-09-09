@@ -1,18 +1,15 @@
 {
   "version": 2,
-  "buildCommand": "npm run build:web",
-  "outputDirectory": "apps/web/.next",
-  "installCommand": "npm install",
-  "framework": "nextjs",
-  "functions": {
-    "apps/web/app/**/*.tsx": {
-      "maxDuration": 10
-    }
-  },
-  "rewrites": [
+  "builds": [
     {
-      "source": "/api/(.*)",
-      "destination": "https://api-staging.agentic-social.com/api/$1"
+      "src": "apps/web/package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "apps/web/$1"
     }
   ],
   "env": {

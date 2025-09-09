@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "turbo run dev --parallel",
     "build": "turbo run build",
-    "build:web": "turbo run build --filter=web",
+    "build:web": "cd apps/web && npm run build",
     "build:api": "turbo run build --filter=api",
     "test": "turbo run test",
     "test:unit": "turbo run test:unit",
