@@ -6,7 +6,7 @@
   "framework": "nextjs",
   "functions": {
     "apps/web/app/**/*.tsx": {
-      "maxDuration": 30
+      "maxDuration": 10
     }
   },
   "rewrites": [
@@ -18,6 +18,5 @@
   "env": {
     "NEXT_PUBLIC_API_URL": "https://api-staging.agentic-social.com",
     "NEXT_PUBLIC_WS_URL": "wss://api-staging.agentic-social.com"
-  },
-  "regions": ["iad1", "sfo1"]
+  }
 }
