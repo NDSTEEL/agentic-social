@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Mic, MicOff, Zap, MessageSquare, Image, TrendingUp } from 'lucide-react'
+import DeploymentStatus from '../components/DeploymentStatus'
 
 export default function HomePage() {
   const [isRecording, setIsRecording] = useState(false)
@@ -107,37 +108,8 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Status Section */}
-        <div className="bg-white rounded-xl p-6 shadow-lg max-w-4xl mx-auto">
-          <h3 className="text-xl font-semibold mb-4">🚧 Development Status</h3>
-          <div className="space-y-3">
-            <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
-              <span className="font-medium">Voice Interface Foundation</span>
-              <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
-                In Progress
-              </span>
-            </div>
-            <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-              <span className="font-medium">MCP Agent Framework</span>
-              <span className="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">
-                Planned
-              </span>
-            </div>
-            <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-              <span className="font-medium">Content Generation System</span>
-              <span className="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm">
-                Planned
-              </span>
-            </div>
-          </div>
-          
-          <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-            <p className="text-yellow-800">
-              <strong>🎯 CI/CD Active:</strong> Every completed task automatically deploys to this interface. 
-              Watch progress in real-time as features become available!
-            </p>
-          </div>
-        </div>
+        {/* Live Development Status */}
+        <DeploymentStatus />
       </main>
 
       <footer className="bg-white/80 backdrop-blur-md border-t border-gray-200 py-8">
