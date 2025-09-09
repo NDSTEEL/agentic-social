@@ -1,0 +1,43 @@
+{
+  "name": "agentic-social",
+  "version": "0.1.0",
+  "description": "Voice-first social media automation system using MCP-based AI agents",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev --parallel",
+    "build": "turbo run build",
+    "build:web": "turbo run build --filter=web",
+    "build:api": "turbo run build --filter=api",
+    "test": "turbo run test",
+    "test:unit": "turbo run test:unit",
+    "test:integration": "turbo run test:integration",
+    "test:e2e": "turbo run test:e2e",
+    "test:e2e:headless": "turbo run test:e2e -- --headless",
+    "test:performance": "turbo run test:performance",
+    "test:smoke:production": "turbo run test:smoke --filter=api -- --env=production",
+    "test:voice:staging": "turbo run test:voice --filter=api -- --env=staging",
+    "test:content:staging": "turbo run test:content --filter=api -- --env=staging",
+    "lint": "turbo run lint",
+    "format": "turbo run format",
+    "format:check": "turbo run format:check",
+    "type-check": "turbo run type-check",
+    "type-check:strict": "turbo run type-check:strict",
+    "db:migrate": "turbo run db:migrate --filter=api",
+    "db:migration:status": "turbo run db:migration:status --filter=api",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "setup": "npm install && npm run db:migrate"
+  },
+  "devDependencies": {
+    "turbo": "^1.10.16",
+    "@changesets/cli": "^2.26.2"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
+  "packageManager": "npm@10.2.4"
+}

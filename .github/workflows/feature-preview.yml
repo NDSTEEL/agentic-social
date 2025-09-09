@@ -1,0 +1,81 @@
+name: Feature Preview Deployment
+
+on:
+  push:
+    branches-ignore:
+      - main
+      - staging
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: |
+          npm ci
+          
+      - name: Run tests
+        run: |
+          npm run test:unit
+          npm run test:integration
+          
+      - name: Build frontend
+        run: |
+          npm run build:web
+          
+  deploy-preview:
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Deploy to Vercel Preview
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: ./apps/web
+          scope: ${{ secrets.VERCEL_ORG_ID }}
+          
+      - name: Comment PR with Preview URL
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const branch = context.payload.pull_request.head.ref;
+            const previewUrl = `https://agentic-social-git-${branch}.vercel.app`;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `🚀 **Feature Preview Ready!**\n\n**Preview URL**: ${previewUrl}\n\n**Branch**: \`${branch}\`\n\n**What to test:**\n- Voice interface functionality\n- Real-time dashboard updates\n- Content generation preview\n- Mobile responsiveness\n\n*Preview updates automatically with new commits*`
+            })
+            
+      - name: Slack Notification
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          channel: '#agentic-social-dev'
+          text: |
+            🎯 **Feature Preview Deployed**
+            **Branch**: `${{ github.ref_name }}`
+            **Preview**: https://agentic-social-git-${{ github.ref_name }}.vercel.app
+            **Commit**: ${{ github.event.head_commit.message }}
+            
+            Ready for testing! 🚀
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: always()

@@ -1,0 +1,5 @@
+# Product Mission (Lite)
+
+Agentic Social is a voice-first social media automation system that helps marketing teams and content creators streamline their social media operations by providing MCP-based AI agents for intelligent content creation, competitive analysis, and brand management through natural voice interactions.
+
+Agentic Social serves marketing teams, agencies, content creators, and businesses who need comprehensive social media automation with brand voice consistency and real-time competitive intelligence. Unlike traditional GUI-based social media tools, Agentic Social provides a voice-first interface powered by MCP agents that enables natural language control of complex automation workflows, unified multi-modal content generation through Kie.ai, and continuous competitive monitoring with AI-powered strategic recommendations.
